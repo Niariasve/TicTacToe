@@ -9,9 +9,23 @@ package model;
  * @author User
  */
 public class Tablero {
-    boolean[][] grid;
+    Celda[][] grid;
     
     public Tablero() {
-        
+        grid = new Celda[3][3];
+    }
+    
+    public boolean isEmpty() {
+        for(int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (!grid[i][j].isEmpty())
+                    return false;
+            }
+        }
+        return true;
+    }
+    
+    public void setState(int i, int j, boolean state) {
+        grid[i][j].setEstado(state);
     }
 }
