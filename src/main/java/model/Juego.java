@@ -31,7 +31,8 @@ public class Juego {
             j.tablero = new Tablero();
             j.setCeldas();
             j.moves = 0;
-            return j;
+            juego = j;
+            return juego;
         }
         
         return juego;

@@ -12,9 +12,12 @@ import model.*;
  */
 public class TestDemo {
     public static void main(String[] args) {
-        Celda c = new Celda();
-        c.setSimbol(GameSimbol.O);
-        System.out.println(c.getSimbol());
-        System.out.println(c.getSimbol().equals("NONE"));
+        Juego j = Juego.getInstance();
+        Tablero t = new Tablero();
+        t.setSimbol(0,0,GameSimbol.O);
+        t.setSimbol(1,1,GameSimbol.O);
+        t.setSimbol(2,2,GameSimbol.X);
+        j.setTablero(t);
+        System.out.println(j.hasWinner());
     }
 }
