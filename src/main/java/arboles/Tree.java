@@ -4,6 +4,8 @@
  */
 package arboles;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,6 +44,22 @@ public class Tree<E> {
     
     public void setChild(Tree child) {
         root.children.add(child);
+    }
+    
+    public List<E> recorrer() {
+        List<E> result = new LinkedList<>();
+        if (isEmpty()) return result;
+        
+        Deque<Tree<E>> cola = new ArrayDeque<>(); 
+        cola.offer(this);
+        while(!cola.isEmpty()) {
+            Tree<E> tree = cola.poll();
+            result.add(tree.root.contenido);
+            for (Tree t : tree.getChildren()) {
+                cola.offer(t);
+            }
+        }
+        return result;
     }
     
     private class TreeNode<E> {

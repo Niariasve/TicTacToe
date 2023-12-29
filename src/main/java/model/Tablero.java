@@ -25,7 +25,11 @@ public class Tablero {
         return true;
     }
     
-    public void setState(int i, int j, boolean state) {
-        grid[i][j].setEstado(state);
+    public void setState(int i, int j, GameSimbol simbol) {
+        grid[i][j].setEstado(simbol);
+    }
+    
+    public Celda[][] getGrid() {
+        return grid;
     }
 }

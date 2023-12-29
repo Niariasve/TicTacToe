@@ -8,41 +8,42 @@ package model;
  *
  * @author User
  */
-class Celda {
-    //null = vacio, true = x, false = o;
-    Boolean estado;
+public class Celda {
+    private GameSimbol simbol;
     
-    public Celda() {}
+    public Celda() {
+        simbol = GameSimbol.NONE;
+    }
     
     public boolean isEmpty() {
-        return this.estado == null;
+        return this.simbol == GameSimbol.NONE;
     }
     
     public boolean isO() {
-        return this.estado == false;
+        return this.simbol == GameSimbol.O;
     }
     
     public boolean isX() {
-        return this.estado == true;
+        return this.simbol == GameSimbol.X;
     }
     
     public void clean() {
-        estado = null;
+        simbol = GameSimbol.NONE;
     }
     
     public void setToX() {
-        estado = true;
+        simbol = GameSimbol.X;
     }
     
     public void setToO() {
-        estado = false;
+        simbol = GameSimbol.O;
     }
     
-    public Boolean getEstado() {
-        return this.estado;
+    public String getEstado() {
+        return simbol.toString();
     }
     
-    public void setEstado(boolean state) {
-        estado = state;
+    public void setEstado(GameSimbol simbol) {
+        this.simbol = simbol;
     }
 }
