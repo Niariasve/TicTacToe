@@ -52,7 +52,6 @@ public class Juego {
     
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
-        juego.setCeldas();
     }
     
     public boolean isFull() {
@@ -60,16 +59,24 @@ public class Juego {
         throw new UnsupportedOperationException();
     }
     
-    
     public GameState hasWinner() {
+        juego.setCeldas();
         
+        GameState diagonalWinner = checkDiagonalsForWinner();
+        if (!(diagonalWinner == GameState.NO_WINNER)) {
+            return diagonalWinner;
+        }
         
-        //check diagonales
-        //check horizontal
-        //check vertical
+        GameState horizontalWinner = checkHorizontalForWinner();
+        if (!(horizontalWinner == GameState.NO_WINNER)) {
+            return horizontalWinner;
+        }
         
-        
-        throw new UnsupportedOperationException();
+        GameState verticalWinner = checkVerticalForWinner();
+        if (!(verticalWinner == GameState.NO_WINNER)) {
+            return verticalWinner;
+        }
+        return GameState.NO_WINNER;
     }
     
     private GameState checkDiagonalsForWinner() {                       

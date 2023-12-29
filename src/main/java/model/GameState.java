@@ -9,5 +9,5 @@ package model;
  * @author User
  */
 public enum GameState {
-    NO_WINNER, WIN_X, WIN_O;
+    NO_WINNER, WIN_X, WIN_O, TIE;
 }
