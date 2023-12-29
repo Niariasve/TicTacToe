@@ -9,7 +9,7 @@ package model;
  * @author User
  */
 public class Tablero {
-    Celda[][] grid;
+    private Celda[][] grid;
     
     public Tablero() {
         grid = new Celda[3][3];
@@ -25,11 +25,15 @@ public class Tablero {
         return true;
     }
     
-    public void setState(int i, int j, GameSimbol simbol) {
-        grid[i][j].setEstado(simbol);
+    public void setSimbol(int i, int j, GameSimbol simbol) {
+        grid[i][j].setSimbol(simbol);
     }
     
     public Celda[][] getGrid() {
         return grid;
+    }
+    
+    public Celda getCelda(int i, int j) {
+        return grid[i][j];
     }
 }

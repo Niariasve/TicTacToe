@@ -13,12 +13,23 @@ public class Juego {
     private Tablero tablero;
     private int moves;
     
+    private GameSimbol top_left;
+    private GameSimbol center;
+    private GameSimbol bottom_right;
+    private GameSimbol bottom_left;   
+    private GameSimbol top_right;
+    private GameSimbol top_center; 
+    private GameSimbol left_center;
+    private GameSimbol bottom_center;
+    private GameSimbol right_center;
+    
     private Juego() {}
     
     public static Juego getInstance() {
         if (juego == null) {
             Juego j = new Juego();
             j.tablero = new Tablero();
+            j.setCeldas();
             j.moves = 0;
             return j;
         }
@@ -26,8 +37,22 @@ public class Juego {
         return juego;
     }
     
+    //llamar cada vez que se realize un movimiento
+    private void setCeldas() {
+        top_left = tablero.getCelda(0, 0).getSimbol();
+        center = tablero.getCelda(1,1).getSimbol();
+        bottom_right = tablero.getCelda(2, 2).getSimbol();
+        bottom_left = tablero.getCelda(2, 0).getSimbol();   
+        top_right = tablero.getCelda(0, 2).getSimbol();
+        top_center = tablero.getCelda(0, 1).getSimbol();
+        left_center = tablero.getCelda(1, 0).getSimbol();
+        bottom_center = tablero.getCelda(2, 1).getSimbol();
+        right_center = tablero.getCelda(1, 2).getSimbol();
+    }
+    
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
+        juego.setCeldas();
     }
     
     public boolean isFull() {
@@ -36,24 +61,62 @@ public class Juego {
     }
     
     
-    /**
-     * Esta función devuelve un Booleano es decir puede devolver null
-     * Si retorna true ha ganado X
-     * Si retorna false ha ganado O
-     * En caso de no haber ganador aún retorna Null
-     * @return 
-     */
     public GameState hasWinner() {
-        Boolean turno = null;
-        //check diagonales,
+        
+        
+        //check diagonales
         //check horizontal
         //check vertical
+        
+        
         throw new UnsupportedOperationException();
     }
     
-    public boolean getTurn() {
+    private GameState checkDiagonalsForWinner() {                       
+        if (top_left == center && top_left == bottom_right) {
+             return gameWinnerProcessor(top_left);
+        }       
+        if (bottom_left == center && bottom_left == top_right) {
+            return gameWinnerProcessor(bottom_left);
+        }       
+        return GameState.NO_WINNER;
+    }
+    
+    private GameState checkHorizontalForWinner() {
+        if (top_left == top_center && top_left == top_right) {
+            return gameWinnerProcessor(top_left);
+        } 
+        if (left_center == center && left_center == right_center) {
+            return gameWinnerProcessor(left_center);
+        }
+        if (bottom_left == bottom_center && bottom_left == bottom_right) {
+            return gameWinnerProcessor(bottom_left);
+        }
+        return GameState.NO_WINNER;
+    }
+    
+    private GameState checkVerticalForWinner() {
+        if (top_left == left_center && top_left == bottom_left) {
+            return gameWinnerProcessor(top_left);
+        } 
+        if (top_center == center && top_center == bottom_center) {
+            return gameWinnerProcessor(top_center);
+        }
+        if (top_right == right_center && top_right == bottom_right) {
+            return gameWinnerProcessor(top_right);
+        }
+        return GameState.NO_WINNER;
+    }
+    
+    private GameState gameWinnerProcessor(GameSimbol gameSimbol) {
+        if (gameSimbol == GameSimbol.X)
+            return GameState.WIN_X;
+        return GameState.WIN_O;
+    }
+    
+    public GameSimbol getTurn() {
         if ((moves % 2) == 1)
-            return true;
-        return false;
+            return GameSimbol.X;
+        return GameSimbol.O;
     }
 }

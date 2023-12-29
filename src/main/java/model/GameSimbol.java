@@ -10,4 +10,5 @@ package model;
  */
 public enum GameSimbol {
     X, O, NONE;
+    
 }

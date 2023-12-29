@@ -13,8 +13,8 @@ import model.*;
 public class TestDemo {
     public static void main(String[] args) {
         Celda c = new Celda();
-        c.setEstado(GameSimbol.O);
-        System.out.println(c.getEstado());
-        System.out.println(c.getEstado().equals("NONE"));
+        c.setSimbol(GameSimbol.O);
+        System.out.println(c.getSimbol());
+        System.out.println(c.getSimbol().equals("NONE"));
     }
 }

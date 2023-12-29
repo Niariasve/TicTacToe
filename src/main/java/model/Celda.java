@@ -39,11 +39,11 @@ public class Celda {
         simbol = GameSimbol.O;
     }
     
-    public String getEstado() {
-        return simbol.toString();
+    public GameSimbol getSimbol() {
+        return simbol;
     }
     
-    public void setEstado(GameSimbol simbol) {
+    public void setSimbol(GameSimbol simbol) {
         this.simbol = simbol;
     }
 }
