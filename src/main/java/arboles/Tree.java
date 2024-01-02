@@ -38,7 +38,7 @@ public class Tree<E> {
         root.contenido = e;
     }
     
-    public List<Tree> getChildren() {
+    public List<Tree<E>> getChildren() {
         return root.children;
     }
     
@@ -62,9 +62,28 @@ public class Tree<E> {
         return result;
     }
     
+    public int countLeafs() {
+        if (isEmpty()) return 0;
+        
+        int c = 0;
+        Deque<Tree<E>> cola = new ArrayDeque<>();
+        cola.offer(this);
+        while(!cola.isEmpty()) {
+            Tree<E> tree = cola.poll();
+            if (!tree.isLeaf()) {
+                for (Tree t : tree.getChildren()) {
+                    cola.offer(t);
+                }
+            } else {
+                c++;
+            }
+        }
+        return c;
+    }
+    
     private class TreeNode<E> {
         E contenido;
-        List<Tree> children;
+        List<Tree<E>> children;
         
         TreeNode(E contenido) {
             this.contenido = contenido;

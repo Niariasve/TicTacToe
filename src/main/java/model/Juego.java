@@ -9,7 +9,6 @@ package model;
  * @author User
  */
 public class Juego {
-    private static Juego juego;
     private Tablero tablero;
     private int moves;
     
@@ -23,20 +22,24 @@ public class Juego {
     private GameSimbol bottom_center;
     private GameSimbol right_center;
     
-    private Juego() {}
-    
-    public static Juego getInstance() {
-        if (juego == null) {
-            Juego j = new Juego();
-            j.tablero = new Tablero();
-            j.setCeldas();
-            j.moves = 0;
-            juego = j;
-            return juego;
-        }
-        
-        return juego;
+    public Juego() {
+        this.tablero = new Tablero();
+        this.setCeldas();
+        moves = 0;
     }
+    
+//    public static Juego getInstance() {
+//        if (juego == null) {
+//            Juego j = new Juego();
+//            j.tablero = new Tablero();
+//            j.setCeldas();
+//            j.moves = 0;
+//            juego = j;
+//            return juego;
+//        }
+//        
+//        return juego;
+//    }
     
     //llamar cada vez que se realize un movimiento
     private void setCeldas() {
@@ -53,15 +56,21 @@ public class Juego {
     
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
+        moves++;
     }
     
-    public boolean isFull() {
-        //TODO
-        throw new UnsupportedOperationException();
+    public boolean hasMoves() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tablero.getCelda(i, j).isEmpty())
+                    return true;
+            }
+        }
+        return false;
     }
     
     public GameState hasWinner() {
-        juego.setCeldas();
+        setCeldas();
         
         GameState diagonalWinner = checkDiagonalsForWinner();
         if (!(diagonalWinner == GameState.NO_WINNER)) {
@@ -123,7 +132,7 @@ public class Juego {
     }
     
     public GameSimbol getTurn() {
-        if ((moves % 2) == 1)
+        if ((moves % 2) == 0)
             return GameSimbol.X;
         return GameSimbol.O;
     }

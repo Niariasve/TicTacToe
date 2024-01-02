@@ -21,9 +21,19 @@ public class Tablero {
     }
     
     public boolean isEmpty() {
-        for(int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
+        for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 if (!grid[i][j].isEmpty())
+                    return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean isFull() {
+        for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (grid[i][j].isEmpty())
                     return false;
             }
         }
@@ -40,5 +50,16 @@ public class Tablero {
     
     public Celda getCelda(int i, int j) {
         return grid[i][j];
+    }
+    
+    public int ocuppied() {
+        int c = 0;
+        for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (!grid[i][j].isEmpty())
+                    c++;
+            }
+        }
+        return c;
     }
 }
