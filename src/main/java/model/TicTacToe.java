@@ -42,7 +42,7 @@ public class TicTacToe {
         return gameState;
     }
      
-    private GameState getGameStateOfGameSimbol(GameSimbol gs) {
+    public static GameState getGameStateOfGameSimbol(GameSimbol gs) {
         if (gs == GameSimbol.X)
             return GameState.WIN_X;
         return GameState.WIN_O;
